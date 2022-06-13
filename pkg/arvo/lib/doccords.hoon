@@ -6309,6 +6309,7 @@
               [%cone p=aura q=atom]                     ::  %constant
               [%frag p=term]                            ::  .leg
               [%funk p=term]                            ::  +arm
+              [%grog p=term]                            ::  $spec
           ==                                            ::
 +$  crib  [summary=cord details=(list sect)]            ::
 +$  help  [links=(list link) =crib]                     ::  documentation
@@ -6600,7 +6601,8 @@
 +$  vein  (list (unit axis))                            ::  search trace
 +$  sect  (list pica)                                   ::  paragraph
 +$  whit                                                ::
-          $:  lab=(unit term)                           ::  label
+          $:  ::lab=(unit term)                           ::  label
+              lab=(unit link)                           ::  label
               boy=(unit (pair cord (list sect)))        ::  body
               def=(map term (pair cord (list sect)))    ::  definitions
               use=(set term)                            ::  defs used
@@ -11580,8 +11582,7 @@
     ++  apex
       ;~  plug
       ::
-        =/  ron  (punt (indo noel))
-        (punt (ifix [ron ron] (into head)))             ::  label
+        (punt (into harp))
       ::
         =/  ron  (punt (indo null))
         (ifix [ron ron] (punt body))                    ::  body
@@ -11630,12 +11631,28 @@
     ++  line  ;~(less ace (cook crip (star prn)))       ::  prose line
     ++  code  ;~(pfix step step (cook crip (star prn))) ::  code line
     ++  noel  ;~(plug (punt ;~(pfix step hax)) null)    ::  header padding
-    ++  head  ;~(pfix hax step cen sym)                 ::  header line
     ++  null  (cold ~ (star ace))                       ::  blank line
     ++  fine                                            ::  definition line
       ;~  (glue ;~(plug col ace))
         sym
         (cook crip (star prn))
+      ==
+    ++  harp
+      %+  knee  *link  |.
+      ;~  sfix
+        %-  stew
+        ^.  stet  ^.  limo
+        :~  :-  '|'
+            ;~(pfix bar (stag %chat sym))
+            :-  '.'
+            ;~(pfix dot (stag %frag sym))
+            :-  '+'
+            ;~(pfix lus (stag %funk sym))
+            :-  '$'
+            ;~(pfix buc (stag %grog sym))
+        ==
+        col
+        ace
       ==
     ::
     ::  step: indent
@@ -13269,14 +13286,22 @@
     ++  boog  !:                                        ::  core arms
       %+  knee  [p=*term q=*hoon]  |.  ~+
       %+  cook
-        |=  [a=whit b=term c=whit d=hoon]
-        =/  e=whit  (glom a c)
-        ?~  boy.e  ::  no arm docs
+        |=  [a=(list whit) b=term c=whit d=hoon]
+        ?~  a
           [b d]
-        [b [%note help+[[%funk b]~ u.boy.e] d]]
+        ?~  t.a
+          =/  e=whit  (glom i.a c)
+          ?~  boy.e
+            [b d]
+          [b [%note help+[[%funk b]~ u.boy.e] d]]
+        ~&  'list of whits'
+        [b d]
+        ::=/  e=whit  (glom a c)
+        ::?~  boy.e  ::  no arm docs
+        ::  [b d]
       ;~  pose
         ;~  plug
-          apex:docs
+          (star apex:docs)
           ;~  pfix  (jest '++')
             ;~  plug
               ;~(pfix gap ;~(pose (cold %$ buc) sym))
@@ -13287,10 +13312,10 @@
         ==
       ::
         %+  cook
-          |=  [a=whit b=term c=whit d=spec]
+          |=  [a=(list whit) b=term c=whit d=spec]
           [a b c [%ktcl [%name b d]]]
         ;~  plug
-          apex:docs
+          (star apex:docs)
           ;~  pfix  (jest '+$')
             ;~  plug
               ;~(pfix gap sym)
@@ -13301,8 +13326,8 @@
         ==
       ::
         %+  cook
-          |=  [a=whit b=term d=hoon]
-          [a b *whit d]
+          |=  [b=term d=hoon]
+          [*(list whit) b *whit d]
         ;~  plug
           %+  cook
             |=  [b=term c=(list term) e=spec]
@@ -13329,6 +13354,69 @@
           ==
         ==
       ==
+    ::  ++  boog-old  !:                                        ::  core arms
+    ::    %+  knee  [p=*term q=*hoon]  |.  ~+
+    ::    %+  cook
+    ::      |=  [a=(list whit) b=term c=whit d=hoon]
+    ::      =/  e=whit  (glom a c)
+    ::      ?~  boy.e  ::  no arm docs
+    ::        [b d]
+    ::      [b [%note help+[[%funk b]~ u.boy.e] d]]
+    ::    ;~  pose
+    ::      ;~  plug
+    ::        apex:docs
+    ::        ;~  pfix  (jest '++')
+    ::          ;~  plug
+    ::            ;~(pfix gap ;~(pose (cold %$ buc) sym))
+    ::            apse:docs
+    ::            ;~(pfix gap loaf)
+    ::          ==
+    ::        ==
+    ::      ==
+    ::    ::
+    ::      %+  cook
+    ::        |=  [a=whit b=term c=whit d=spec]
+    ::        [a b c [%ktcl [%name b d]]]
+    ::      ;~  plug
+    ::        apex:docs
+    ::        ;~  pfix  (jest '+$')
+    ::          ;~  plug
+    ::            ;~(pfix gap sym)
+    ::            apse:docs
+    ::            ;~(pfix gap loan)
+    ::          ==
+    ::        ==
+    ::      ==
+    ::    ::
+    ::      %+  cook
+    ::        |=  [a=whit b=term d=hoon]
+    ::        [a b *whit d]
+    ::      ;~  plug
+    ::        %+  cook
+    ::          |=  [b=term c=(list term) e=spec]
+    ::          ^-  [term hoon]
+    ::          :-  b
+    ::          :+  %brtr
+    ::            :-  %bccl
+    ::            =-  ?>(?=(^ -) -)
+    ::            ::  for each .term in .c, produce $=(term $~(* $-(* *)))
+    ::            ::  ie {term}=mold
+    ::            ::
+    ::            %+  turn  c
+    ::            |=  =term
+    ::            ^-  spec
+    ::            =/  tar  [%base %noun]
+    ::            [%bcts term [%bcsg tar [%bchp tar tar]]]
+    ::          [%ktcl [%made [b c] e]]
+    ::        ;~  pfix  (jest '+*')
+    ::          ;~  plug
+    ::            ;~(pfix gap sym)
+    ::            ;~(pfix gap (ifix [sel ser] (most ace sym)))
+    ::            ;~(pfix gap loan)
+    ::          ==
+    ::        ==
+    ::      ==
+    ::    ==
    ::  parses a or [a b c] or a  b  c  ==
    ++  lynx
       =/  wid  (ifix [sel ser] (most ace sym))
