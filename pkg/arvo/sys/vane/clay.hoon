@@ -5102,7 +5102,7 @@
       dos.rom
     %-  ~(run by dos.rom.ruf)
     |=  =dojo
-    dojo(fod.dom `flue`[~ ~])
+    dojo(fod.dom [~ ~])
   ::
       hoy
     %-  ~(run by hoy.ruf)
@@ -5111,7 +5111,7 @@
         rus
       %-  ~(run by rus.rung)
       |=  =rede
-      rede(fod.dom `flue`[~ ~])
+      rede(fod.dom [~ ~])
     ==
   ==
 ::
