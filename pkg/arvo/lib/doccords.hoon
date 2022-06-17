@@ -11588,7 +11588,18 @@
             ==
         [a b c d]
       ;~  plug
-        (call dibs)
+        ;~  pose
+          (call dibs)
+          ;~  plug
+            (easy ~)
+            =/  ron  (punt (indo null))
+            (ifix [ron ron] (punt body))
+          ==
+          ;~  plug
+            (easy ~)
+            (easy ~)
+          ==
+        ==
         (cook malt (star fill))                         ::  definitions
         (easy ~)                                        ::  defs used (none)
       ==
@@ -11658,7 +11669,8 @@
       |*  bod=rule
       ;~  plug
         (ingo bod)
-        (punt seat)
+        =/  ron  (punt (indo null))
+        (ifix [ron ron] (punt seat))
       ==
     ::
     ++  text  (pick line code)                          ::  text line
@@ -11671,23 +11683,12 @@
         sym
         (cook crip (star prn))
       ==
-    ++  harp
-      %+  knee  *link  |.
-      ;~  sfix
-        %-  stew
-        ^.  stet  ^.  limo
-        :~  :-  '|'
-            ;~(pfix bar (stag %chat sym))
-            :-  '.'
-            ;~(pfix dot (stag %frag sym))
-            :-  '+'
-            ;~(pfix lus (stag %funk sym))
-            :-  '$'
-            ;~(pfix buc (stag %grog sym))
-        ==
-        col
-        ace
+    ++  tine
+      ;~  (glue ;~(plug col ace))
+        dibs
+        (cook crip (star prn))
       ==
+    ::
     ::
     ::  step: indent
     ::  into: :: and indent to end of line, consuming following space.
@@ -11696,13 +11697,16 @@
     ::
     ++  step  ;~(plug ace ace)
     ++  into  |*(bod=rule (indo ;~(pfix step bod)))
-    ::
     ++  indo
       |*  bod=rule
       ;~(pfix col gar ;~(sfix bod (just `@`10) (punt gap)))
     ++  ingo
       |*  bod=rule
       ;~(pfix col gar step ;~(sfix (punt bod) col ace))
+    ::
+    ++  ingox
+      |*  bod=rule
+      ;~(pfix col gar step (punt bod))
     ::
     ++  exit
       |*  bod=rule
@@ -11717,6 +11721,18 @@
         (rant ;~(pfix step text))
         (punt (indo null))
       ==
+    ::
+    ::  ++  hill
+    ::    ::%+  cook
+    ::    ::  |=  [[a=link b=cord] c=(list sect)]
+    ::    ::  [(some a) (some [b c])]
+    ::    ;~  plug
+    ::      (ingox tine)
+    ::      :~  pose
+    ::        (rant text)
+    ::        (easy ~)
+    ::      ==
+    ::    ==
     ::
     ::  rant: series of sections.
     ::
@@ -13843,7 +13859,8 @@
   ::
   ++  tall                                              ::  full tall form
     %+  knee  *hoon
-    |.(~+((wart (wrap ;~(pose expression:(norm &) long lute apex:(sail &))))))
+::    |.(~+((wart (wrap ;~(pose expression:(norm &) long lute apex:(sail &))))))
+    |.(~+((wart ;~(pose expression:(norm &) long lute apex:(sail &)))))
   ++  till                                              ::  mold tall form
     %+  knee  *spec
     |.(~+((wert ;~(pose structure:(norm &) scad))))
