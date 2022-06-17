@@ -11578,15 +11578,17 @@
     |%
     ::
     ::  above core
-    ::
     ++  apex
+      %+  cook
+        |=  $:  $:  a=(unit link)
+                    b=(unit (pair cord (list sect)))
+                ==
+                c=(map term (pair cord (list sect)))
+                d=(set term)
+            ==
+        [a b c d]
       ;~  plug
-      ::
-        (punt (into harp))
-      ::
-        =/  ron  (punt (indo null))
-        (ifix [ron ron] (punt body))                    ::  body
-      ::
+        (call dibs)
         (cook malt (star fill))                         ::  definitions
         (easy ~)                                        ::  defs used (none)
       ==
@@ -11625,6 +11627,38 @@
           (into ;~(pfix step line))
           (rant text)
         ==
+      ==
+    ::
+    ::  +dibs: parses a $link at the start of a formal comment
+    ++  dibs
+      %+  cook  |=([a=term b=term] ;;(link [a b]))
+      %-  stew
+      ^.  stet  ^.  limo
+      :~  :-  '|'
+          ;~(pfix bar (stag %chat sym))
+          :-  '.'
+          ;~(pfix dot (stag %frag sym))
+          :-  '+'
+          ;~(pfix lus (stag %funk sym))
+          :-  '$'
+          ;~(pfix buc (stag %grog sym))
+      ==
+    ::
+    ++  shot
+      |*  bod=rule
+      ;~(plug ;~(sfix line (just `@`10) (punt gap)) bod)
+    ::
+    ++  seat
+      ;~  pose
+        (shot (rant text))
+        (shot (easy ~))
+      ==
+    ::
+    ++  call
+      |*  bod=rule
+      ;~  plug
+        (ingo bod)
+        (punt seat)
       ==
     ::
     ++  text  (pick line code)                          ::  text line
@@ -11666,6 +11700,9 @@
     ++  indo
       |*  bod=rule
       ;~(pfix col gar ;~(sfix bod (just `@`10) (punt gap)))
+    ++  ingo
+      |*  bod=rule
+      ;~(pfix col gar step ;~(sfix (punt bod) col ace))
     ::
     ++  exit
       |*  bod=rule
@@ -11687,7 +11724,7 @@
       |*  sec=rule
       %-  star
       ;~  pfix
-        (indo null)
+        (punt (indo null))  :: why did i need to add a punt here?
         (plus (into sec))
       ==
     --
@@ -13286,22 +13323,16 @@
     ++  boog  !:                                        ::  core arms
       %+  knee  [p=*term q=*hoon]  |.  ~+
       %+  cook
-        |=  [a=(list whit) b=term c=whit d=hoon]
-        ?~  a
+        |=  [a=whit b=term c=whit d=hoon]
+        =/  e=whit  (glom a c)
+        ?~  boy.e
           [b d]
-        ?~  t.a
-          =/  e=whit  (glom i.a c)
-          ?~  boy.e
-            [b d]
-          [b [%note help+[[%funk b]~ u.boy.e] d]]
-        ~&  'list of whits'
-        [b d]
-        ::=/  e=whit  (glom a c)
-        ::?~  boy.e  ::  no arm docs
-        ::  [b d]
+        ?~  lab.e
+          [b d]
+        [b [%note help+[[u.lab.e]~ u.boy.e] d]]
       ;~  pose
         ;~  plug
-          (star apex:docs)
+          apex:docs
           ;~  pfix  (jest '++')
             ;~  plug
               ;~(pfix gap ;~(pose (cold %$ buc) sym))
@@ -13312,10 +13343,10 @@
         ==
       ::
         %+  cook
-          |=  [a=(list whit) b=term c=whit d=spec]
+          |=  [a=whit b=term c=whit d=spec]
           [a b c [%ktcl [%name b d]]]
         ;~  plug
-          (star apex:docs)
+          apex:docs
           ;~  pfix  (jest '+$')
             ;~  plug
               ;~(pfix gap sym)
@@ -13327,7 +13358,7 @@
       ::
         %+  cook
           |=  [b=term d=hoon]
-          [*(list whit) b *whit d]
+          [*whit b *whit d]
         ;~  plug
           %+  cook
             |=  [b=term c=(list term) e=spec]
