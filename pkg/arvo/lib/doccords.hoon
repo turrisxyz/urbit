@@ -13413,69 +13413,6 @@
           ==
         ==
       ==
-    ::  ++  boog-old  !:                                        ::  core arms
-    ::    %+  knee  [p=*term q=*hoon]  |.  ~+
-    ::    %+  cook
-    ::      |=  [a=(list whit) b=term c=whit d=hoon]
-    ::      =/  e=whit  (glom a c)
-    ::      ?~  boy.e  ::  no arm docs
-    ::        [b d]
-    ::      [b [%note help+[[%funk b]~ u.boy.e] d]]
-    ::    ;~  pose
-    ::      ;~  plug
-    ::        apex:docs
-    ::        ;~  pfix  (jest '++')
-    ::          ;~  plug
-    ::            ;~(pfix gap ;~(pose (cold %$ buc) sym))
-    ::            apse:docs
-    ::            ;~(pfix gap loaf)
-    ::          ==
-    ::        ==
-    ::      ==
-    ::    ::
-    ::      %+  cook
-    ::        |=  [a=whit b=term c=whit d=spec]
-    ::        [a b c [%ktcl [%name b d]]]
-    ::      ;~  plug
-    ::        apex:docs
-    ::        ;~  pfix  (jest '+$')
-    ::          ;~  plug
-    ::            ;~(pfix gap sym)
-    ::            apse:docs
-    ::            ;~(pfix gap loan)
-    ::          ==
-    ::        ==
-    ::      ==
-    ::    ::
-    ::      %+  cook
-    ::        |=  [a=whit b=term d=hoon]
-    ::        [a b *whit d]
-    ::      ;~  plug
-    ::        %+  cook
-    ::          |=  [b=term c=(list term) e=spec]
-    ::          ^-  [term hoon]
-    ::          :-  b
-    ::          :+  %brtr
-    ::            :-  %bccl
-    ::            =-  ?>(?=(^ -) -)
-    ::            ::  for each .term in .c, produce $=(term $~(* $-(* *)))
-    ::            ::  ie {term}=mold
-    ::            ::
-    ::            %+  turn  c
-    ::            |=  =term
-    ::            ^-  spec
-    ::            =/  tar  [%base %noun]
-    ::            [%bcts term [%bcsg tar [%bchp tar tar]]]
-    ::          [%ktcl [%made [b c] e]]
-    ::        ;~  pfix  (jest '+*')
-    ::          ;~  plug
-    ::            ;~(pfix gap sym)
-    ::            ;~(pfix gap (ifix [sel ser] (most ace sym)))
-    ::            ;~(pfix gap loan)
-    ::          ==
-    ::        ==
-    ::      ==
-    ::    ==
    ::  parses a or [a b c] or a  b  c  ==
    ++  lynx
       =/  wid  (ifix [sel ser] (most ace sym))
@@ -13496,6 +13433,8 @@
     ++  whap  !:                                        ::  chapter
       %+  cook
         |=  a=(list (pair term hoon))
+        ::  check hoons for notes and move them to the correct arm
+        %-  whir
         |-  ^-  (map term hoon)
         ?~  a  ~
         =+  $(a t.a)
@@ -13505,6 +13444,61 @@
           [%eror (weld "duplicate arm: +" (trip p.i.a))]
         q.i.a
       (most muck boog)
+    ::
+    ::  +whir: checks hoons for wrapped notes and moves them to the correct arm
+    ::  used for batch comment processing
+    ++  whir
+      |=  a=(map term hoon)
+      ^-  (map term hoon)
+      =/  nots=(list help)  (waff ~(val by a))
+      ::  removes the notes from each hoon
+      =/  nuto=(map term hoon)  (~(run by a) ward)
+      |-
+      ?~  nots  nuto
+      =/  not=help  i.nots
+      ::  if there is no link, its not part of a batch comment
+      ?~  links.not
+        $(nots t.nots)
+      =/  lin=link  i.links.not
+      =/  nom=term
+        ?+  lin  %$
+          [%chat *]  p.lin
+          [%frag *]  p.lin
+          [%funk *]  p.lin
+          [%grog *]  p.lin
+        ==
+      ?:  (~(has by nuto) nom)
+        =/  gen=hoon  (~(got by nuto) nom)
+        %=  $
+          nuto  (~(gas by nuto) ~[[nom [%note [%help not] gen]]])
+          nots  t.nots
+        ==
+      ~&  ['batch comment has no matching arm' not]
+      $(nots t.nots)
+    ::
+    ++  waff
+      |=  gens=(list hoon)
+      ^-  (list help)
+      =|  nots=(list help)
+      |-
+      ?~  gens  nots
+      =/  gen  i.gens
+      |-
+      ?:  ?=([%note *] gen)
+        ?:  ?=([%help *] p.gen)
+          $(nots (snoc nots p.p.gen), gen q.gen)
+        ^$(gens t.gens)
+      ^$(gens t.gens)
+    ::
+    ++  ward
+      |=  gen=hoon
+      ^-  hoon
+      |-
+      ?:  ?=([%note *] gen)
+        ?:  ?=([%help *] p.gen)
+          $(gen q.gen)
+        gen
+      gen
     ::
     ++  whip                                            ::  chapter declare
       ;~  plug
