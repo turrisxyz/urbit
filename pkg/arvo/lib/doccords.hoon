@@ -11660,9 +11660,12 @@
       ;~(plug ;~(sfix line (just `@`10) (punt gap)) bod)
     ::
     ++  seat
-      ;~  pose
-        (shot (rant text))
-        (shot (easy ~))
+      ;~  less
+        (ingo dibs)
+        ;~  pose
+          (shot (rant text))
+          (shot (easy ~))
+        ==
       ==
     ::
     ++  call
@@ -11674,7 +11677,8 @@
       ==
     ::
     ++  text  (pick line code)                          ::  text line
-    ++  line  ;~(less ace (cook crip (star prn)))       ::  prose line
+    ::  TODO: the buc and lus in +line was a kludge to get batch comments working, fix this parser
+    ++  line  ;~(less ace buc lus (cook crip (star prn)))       ::  prose line
     ++  code  ;~(pfix step step (cook crip (star prn))) ::  code line
     ++  noel  ;~(plug (punt ;~(pfix step hax)) null)    ::  header padding
     ++  null  (cold ~ (star ace))                       ::  blank line
@@ -13339,16 +13343,24 @@
     ++  boog  !:                                        ::  core arms
       %+  knee  [p=*term q=*hoon]  |.  ~+
       %+  cook
-        |=  [a=whit b=term c=whit d=hoon]
-        =/  e=whit  (glom a c)
+        |=  [a=(list whit) b=term c=whit d=hoon]
+        =/  res=hoon  d
+        |-
+        ?~  a
+          [b res]
+        =/  e=whit  (glom i.a c)
         ?~  boy.e
-          [b d]
+          $(a t.a)
         ?~  lab.e
-          [b d]
-        [b [%note help+[[u.lab.e]~ u.boy.e] d]]
+          $(a t.a)
+        %=  $
+          a    t.a
+          res  [%note help+[[u.lab.e]~ u.boy.e] res]
+        ==
+::        [b [%note help+[[u.lab.e]~ u.boy.e] d]]
       ;~  pose
         ;~  plug
-          apex:docs
+          (stun [0 10] apex:docs)  :: star instead?
           ;~  pfix  (jest '++')
             ;~  plug
               ;~(pfix gap ;~(pose (cold %$ buc) sym))
@@ -13359,10 +13371,10 @@
         ==
       ::
         %+  cook
-          |=  [a=whit b=term c=whit d=spec]
+          |=  [a=(list whit) b=term c=whit d=spec]
           [a b c [%ktcl [%name b d]]]
         ;~  plug
-          apex:docs
+          (stun [0 10] apex:docs)
           ;~  pfix  (jest '+$')
             ;~  plug
               ;~(pfix gap sym)
@@ -13374,7 +13386,7 @@
       ::
         %+  cook
           |=  [b=term d=hoon]
-          [*whit b *whit d]
+          [*(list whit) b *whit d]
         ;~  plug
           %+  cook
             |=  [b=term c=(list term) e=spec]
