@@ -13859,8 +13859,7 @@
   ::
   ++  tall                                              ::  full tall form
     %+  knee  *hoon
-::    |.(~+((wart (wrap ;~(pose expression:(norm &) long lute apex:(sail &))))))
-    |.(~+((wart ;~(pose expression:(norm &) long lute apex:(sail &)))))
+    |.(~+((wart (wrap ;~(pose expression:(norm &) long lute apex:(sail &))))))
   ++  till                                              ::  mold tall form
     %+  knee  *spec
     |.(~+((wert ;~(pose structure:(norm &) scad))))
